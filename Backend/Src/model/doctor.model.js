@@ -16,6 +16,10 @@ const schema = mongoose.Schema(
             type:Number,
             required:true
         },
+        fees: {
+            type: Number,
+            required: true,
+          },
         rating:{
             type:Number,
             required:true
