@@ -36,13 +36,15 @@ const Doctors = () => {
           <p onClick={()=> speciality === 'Gynecologist' ? navigate('/doctors') : navigate('/doctors/Gynecologist')} className='border flex p-2 pl-2 text-sm rounded-sm  sm:w-[130%] '>Gynecologist</p>
           <p onClick={()=> speciality === 'Dermatologist' ? navigate('/doctors') : navigate('/doctors/Dermatologist')} className='border flex p-2 pl-2 text-sm rounded-sm  sm:w-[130%] '>Dermatologist</p>
           <p onClick={()=> speciality === 'Pediatricians' ? navigate('/doctors') : navigate('/doctors/Pediatricians')} className='border flex p-2 pl-2 text-sm rounded-sm  sm:w-[130%] '>Pediatricians</p>
-          <p onClick={()=> speciality === 'Neurologist' ? navigate('/doctors') : navigate('/doctors/Neurologist')} className='border flex p-2 pl-2 text-sm rounded-sm  sm:w-[130%] '>Neurologist</p>
+          <p onClick={()=> speciality === 'Neurologist' ? navigate('/doctors') : navigate('/doctors/Neurologist')} className='border flex p-2 pl-2 text-sm rounded-sm  sm:w-[130%] '>    Neurologist</p>
           <p onClick={()=> speciality === 'Gastroenterologist' ? navigate('/doctors') : navigate('/doctors/')} className='border flex p-2 pl-2 text-sm rounded-sm  sm:w-[130%] '>Gastroenterologist</p>
         </div>
         <div className='  grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 gap-y-6 w-full '>
           {
             filterDoc.map((item,index)=>(
-            <div onClick={()=>navigate(`/appointment/${item._id} `)} className='border rounded-md w-60 md:hover:scale-105  '>
+            <div 
+              key={item._id}  
+              onClick={()=>navigate(`/appointment/${item._id} `)} className='border rounded-md w-60   md:hover:scale-105  '>
                 <img className='bg-blue-100' src={item.image} alt="" />
                 <div className='flex flex-col text-sm  pt-2.5 pl-3.5 pb-5 '>
                     <div className=''>
