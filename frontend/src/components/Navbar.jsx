@@ -1,9 +1,14 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { assets } from '../assets/assets_frontend/assets'
-import { NavLink } from 'react-router-dom'
+import { NavLink, useNavigate } from 'react-router-dom'
 
 
 const Navbar = () => {
+    const navigate = useNavigate();
+    const [token,setToken ] = useState(true);
+    const [showMenu ,setShowMenu] = useState(false);
+
+
   return (
     <div className='flex items-center justify-between border-b text-sm py-4'>
       <img src={assets.logo} alt=''/>
@@ -25,9 +30,14 @@ const Navbar = () => {
                 <hr className=' border-none outline-none w-3/5 m-auto hidden h-0.5 bg-[#5f6FFF]'/>
             </NavLink>
         </ul>
-        <button className='border rounded-4xl  pb-2.5 pt-2.5 pr-6 pl-6 text-white bg-blue-600'>
+        {
+            token ? <div>
+                <div></div>
+            </div> : <button onClick={()=>navigate('/login')} className='border rounded-4xl  pb-2.5 pt-2.5 pr-6 pl-6 text-white bg-blue-600'>
             Create Account
         </button>
+        }
+        
     </div>
   )
 }
