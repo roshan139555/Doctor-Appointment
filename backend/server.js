@@ -26,4 +26,5 @@ app.get("/", (req, res) => {
   res.send("API WORKING");
 });
 
-app.listen(port, () => console.log("Server started", port));
+//app.listen(port, () => console.log("Server started", port));
+module.exports = app;
