@@ -19,7 +19,6 @@ const imageUrls = [
   "https://res.cloudinary.com/dpomrmope/image/upload/v1764440207/doc11_n8ks3l.png",
   "https://res.cloudinary.com/dpomrmope/image/upload/v1764440206/doc12_yvuyjd.png",
   "https://res.cloudinary.com/dpomrmope/image/upload/v1764440207/doc13_rjjc9y.png",
-  // fallback: if no doc14 provided, reuse doc13 or any other
   "https://res.cloudinary.com/dpomrmope/image/upload/v1764440207/doc13_rjjc9y.png",
   "https://res.cloudinary.com/dpomrmope/image/upload/v1764440207/doc15_njd9cl.png"
 ];
@@ -37,7 +36,7 @@ const doctorsData = [
         email: 'richard@gmail.com',
         password: 'password123',
         available: true,
-        date: new Date()
+        date: Date.now()
     },
     {
         name: 'Dr. Emily Larson',
@@ -51,7 +50,7 @@ const doctorsData = [
         email: 'emily@gmail.com',
         password: 'password123',
         available: true,
-        date: new Date()
+        date: Date.now()
     },
     {
         name: 'Dr. Sarah Patel',
@@ -65,7 +64,7 @@ const doctorsData = [
         email: 'sarah@gmail.com',
         password: 'password123',
         available: true,
-        date: new Date()
+        date: Date.now()
     },
     {
         name: 'Dr. Christopher Lee',
@@ -79,7 +78,7 @@ const doctorsData = [
         email: 'christopher@gmail.com',
         password: 'password123',
         available: true,
-        date: new Date()
+        date: Date.now()
     },
     {
         name: 'Dr. Jennifer Garcia',
@@ -93,7 +92,7 @@ const doctorsData = [
         email: 'jennifer@gmail.com',
         password: 'password123',
         available: true,
-        date: new Date()
+        date: Date.now()
     },
     {
         name: 'Dr. Andrew Williams',
@@ -107,7 +106,7 @@ const doctorsData = [
         email: 'andrew@gmail.com',
         password: 'password123',
         available: true,
-        date: new Date()
+        date: Date.now()
     },
     {
         name: 'Dr. Christopher Davis',
@@ -121,7 +120,7 @@ const doctorsData = [
         email: 'davis@gmail.com',
         password: 'password123',
         available: true,
-        date: new Date()
+        date: Date.now()
     },
     {
         name: 'Dr. Timothy White',
@@ -135,7 +134,7 @@ const doctorsData = [
         email: 'timothy@gmail.com',
         password: 'password123',
         available: true,
-        date: new Date()
+        date: Date.now()
     },
     {
         name: 'Dr. Ava Mitchell',
@@ -149,7 +148,7 @@ const doctorsData = [
         email: 'ava@gmail.com',
         password: 'password123',
         available: true,
-        date: new Date()
+        date: Date.now()
     },
     {
         name: 'Dr. Jeffrey King',
@@ -163,7 +162,7 @@ const doctorsData = [
         email: 'jeffrey@gmail.com',
         password: 'password123',
         available: true,
-        date: new Date()
+        date: Date.now()
     },
     {
         name: 'Dr. Zoe Kelly',
@@ -177,7 +176,7 @@ const doctorsData = [
         email: 'zoe@gmail.com',
         password: 'password123',
         available: true,
-        date: new Date()
+        date: Date.now()
     },
     {
         name: 'Dr. Patrick Harris',
@@ -191,7 +190,7 @@ const doctorsData = [
         email: 'patrick@gmail.com',
         password: 'password123',
         available: true,
-        date: new Date()
+        date: Date.now()
     },
     {
         name: 'Dr. Chloe Evans',
@@ -205,7 +204,7 @@ const doctorsData = [
         email: 'chloe@gmail.com',
         password: 'password123',
         available: true,
-        date: new Date()
+        date: Date.now()
     },
     {
         name: 'Dr. Ryan Martinez',
@@ -219,7 +218,7 @@ const doctorsData = [
         email: 'ryan@gmail.com',
         password: 'password123',
         available: true,
-        date: new Date()
+        date: Date.now()
     },
     {
         name: 'Dr. Amelia Hill',
@@ -233,7 +232,7 @@ const doctorsData = [
         email: 'amelia@gmail.com',
         password: 'password123',
         available: true,
-        date: new Date()
+        date: Date.now()
     }
 ];
 
@@ -253,8 +252,8 @@ const seedDoctors = async () => {
         console.log("🗑️  Cleared existing doctors");
 
         // Insert new doctors
-        await doctorModel.insertMany(doctorsData);
-        console.log(`✅ ${doctorsData.length} doctors seeded successfully!`);
+        const result = await doctorModel.insertMany(doctorsData);
+        console.log(`✅ ${result.length} doctors seeded successfully!`);
 
         process.exit(0);
     } catch (error) {

@@ -5,10 +5,16 @@ import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 
 const Login = () => {
-  const { backendUrl, token, setToken } = useContext(AppContext);
+  const context = useContext(AppContext);
+  const { backendUrl, token, setToken } = context || {};
   const navigate = useNavigate();
 
+  if (!backendUrl) {
+    return <div className="min-h-[80vh] flex items-center justify-center">Loading...</div>;
+  }
+
   const [state, setState] = useState("Sign Up");
+  const [loading, setLoading] = useState(false);
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -16,6 +22,7 @@ const Login = () => {
 
   const onSubmitHandler = async (event) => {
     event.preventDefault();
+    setLoading(true);
 
     try {
       if (state === "Sign Up") {
@@ -27,6 +34,7 @@ const Login = () => {
         if (data.success) {
           localStorage.setItem("token", data.token);
           setToken(data.token);
+          toast.success("Account created successfully!");
         } else {
           toast.error(data.message);
         }
@@ -38,24 +46,23 @@ const Login = () => {
         if (data.success) {
           localStorage.setItem("token", data.token);
           setToken(data.token);
+          toast.success("Logged in successfully!");
         } else {
           toast.error(data.message);
         }
       }
     } catch (error) {
       toast.error(error.message);
+    } finally {
+      setLoading(false);
     }
   };
 
-  useEffect(() => {
-    if (token) {
-      navigate("/");
-    }
-  }, [token]);
+  
 
   return (
-    <form onSubmit={onSubmitHandler} className="min-h-[80vh] flex items-center">
-      <div className="flex flex-col gap-3 m-auto items-start p-8 min-w-[340px] sm:min-w-96 border rounded-xl text-zinc-600 text-sm shadow-lg">
+    <form onSubmit={onSubmitHandler} className="min-h-[80vh] flex items-center justify-center">
+      <div className="flex flex-col gap-3 m-auto items-start p-8 min-w-[340px] sm:min-w-96 border rounded-xl text-zinc-600 text-sm shadow-lg bg-white">
         <p className="text-2xl font-semibold">
           {state === "Sign Up" ? "Create Account" : "Login"}
         </p>
@@ -98,9 +105,10 @@ const Login = () => {
         </div>
         <button
           type="submit"
-          className="bg-primary text-white w-full py-2 rounded-md text-base"
+          className="bg-primary text-white w-full py-2 rounded-md text-base disabled:opacity-50"
+          disabled={loading}
         >
-          {state === "Sign Up" ? "Create Account" : "Login"}
+          {loading ? "Please wait..." : state === "Sign Up" ? "Create Account" : "Login"}
         </button>
         {state === "Sign Up" ? (
           <p>
